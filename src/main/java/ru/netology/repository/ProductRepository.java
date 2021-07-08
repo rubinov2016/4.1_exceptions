@@ -29,7 +29,11 @@ public class ProductRepository {
     }
 
     public void removeById(int id) {
-        try {
+        //В методе удаления removeById сначала проверяйте, есть ли элемент (для этого прямо из метода removeById
+        // вызывайте метод findById: если результат - null, тогда выкидывайте исключение NotFoundException*)
+        //Ловить на выхода за пределы массива это умно,
+        //но так не делают, сделайте через условный оператор (как в условии)
+        if (findById(id)!=null) {
             int length = items.length - 1;
             Product[] tmp = new Product[length];
             int index = 0;
@@ -40,7 +44,7 @@ public class ProductRepository {
                 }
             }
             items = tmp;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } else {
             //e.printStackTrace();
             String s = "Element with id: " + id + " not found";
             System.out.print(s);
